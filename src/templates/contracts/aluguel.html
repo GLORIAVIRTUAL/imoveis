@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Locação Residencial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2cm;
+            line-height: 1.5;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        p {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-top: 20px;
+        }
+        .signatures {
+            margin-top: 80px;
+            display: flex; /* Use flexbox for alignment if needed */
+            justify-content: space-around; /* Adjust as needed */
+            text-align: center;
+        }
+        .signature-block {
+            margin-top: 40px; /* Space between signature lines */
+        }
+        .signature-line {
+            border-top: 1px solid #000;
+            width: 250px;
+            margin: 0 auto 5px auto; /* Center the line */
+        }
+        strong { font-weight: bold; }
+        .indent { text-indent: 40px; }
+        .clausula { margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>CONTRATO DE LOCAÇÃO RESIDENCIAL</h1>
+
+    <div class="section">
+        <h2>DAS PARTES</h2>
+        <p><strong>LOCADOR(A):</strong> {{seller_name}}, nacionalidade {{seller_nationality | default("brasileiro(a)")}}, estado civil {{seller_marital_status}}, profissão {{seller_profession | default("não informado")}}, portador(a) do RG nº {{seller_rg}} expedido por {{seller_rg_issuer | default("SSP/UF")}} e inscrito(a) no CPF/MF sob o nº {{seller_cpf}}, residente e domiciliado(a) em {{seller_address}}, doravante denominado(a) simplesmente LOCADOR(A).</p>
+        
+        <p><strong>LOCATÁRIO(A):</strong> {{buyer_name}}, nacionalidade {{buyer_nationality | default("brasileiro(a)")}}, estado civil {{buyer_marital_status}}, profissão {{buyer_profession | default("não informado")}}, portador(a) do RG nº {{buyer_rg}} expedido por {{buyer_rg_issuer | default("SSP/UF")}} e inscrito(a) no CPF/MF sob o nº {{buyer_cpf}}, residente e domiciliado(a) em {{buyer_address}}, doravante denominado(a) simplesmente LOCATÁRIO(A).</p>
+        
+        <p>As partes acima identificadas têm, entre si, justo e contratado o presente Contrato de Locação Residencial, que se regerá pela Lei nº 8.245/91 e pelas cláusulas e condições seguintes.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO OBJETO DO CONTRATO</h2>
+        <p class="clausula"><strong>CLÁUSULA PRIMEIRA:</strong> O objeto do presente contrato é a locação do imóvel residencial de propriedade do(a) LOCADOR(A), situado em {{property_address}}, Bairro {{property_neighborhood}}, Cidade {{property_city_name}}, Estado {{property_city_state}}, CEP {{property_cep | default("não informado")}}, constituído por {{property_description}}.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO PRAZO DA LOCAÇÃO</h2>
+        <p class="clausula"><strong>CLÁUSULA SEGUNDA:</strong> O prazo da locação é de <strong>{{rental_period | default("30 (trinta)")}}</strong> meses, iniciando-se em {{rental_start_date | default("__/__/____")}} e terminando em {{rental_end_date | default("__/__/____")}}, data em que o(a) LOCATÁRIO(A) se obriga a restituir o imóvel locado, completamente desocupado, no estado em que o recebeu, independentemente de aviso ou notificação judicial ou extrajudicial.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO VALOR DO ALUGUEL, ENCARGOS E FORMA DE PAGAMENTO</h2>
+        <p class="clausula"><strong>CLÁUSULA TERCEIRA:</strong> O valor mensal do aluguel é de <strong>{{property_price}}</strong> ({{property_price_written | default("valor por extenso")}}), que deverá ser pago pelo(a) LOCATÁRIO(A) diretamente ao(à) LOCADOR(A) ou a quem este indicar, até o dia {{payment_due_day | default("05 (cinco)")}} de cada mês subsequente ao vencido, através de {{payment_method | default("depósito bancário na conta ____, Agência ____, Banco ____")}}.</p>
+        <p><strong>Parágrafo Primeiro:</strong> Além do aluguel, obriga-se o(a) LOCATÁRIO(A) a pagar pontualmente o Imposto Predial e Territorial Urbano (IPTU), as taxas de condomínio (se houver), as contas de água, luz, gás e quaisquer outras despesas que incidam ou venham a incidir sobre o imóvel locado, durante todo o período da locação.</p>
+        <p><strong>Parágrafo Segundo:</strong> O valor do aluguel será reajustado anualmente, ou na menor periodicidade permitida por lei, pela variação do índice {{index | default("IGP-M/FGV")}} ou outro índice que venha a substituí-lo.</p>
+        <p><strong>Parágrafo Terceiro:</strong> O não pagamento do aluguel e/ou encargos no prazo estipulado implicará na incidência de multa de {{late_fee_percentage | default("10%")}} ({{late_fee_percentage_written | default("dez por cento")}}) sobre o valor devido, acrescido de juros de mora de 1% (um por cento) ao mês e correção monetária.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO USO DO IMÓVEL</h2>
+        <p class="clausula"><strong>CLÁUSULA QUARTA:</strong> O imóvel objeto deste contrato destina-se exclusivamente para fins residenciais do(a) LOCATÁRIO(A) e sua família, não sendo permitida a sublocação, cessão ou empréstimo, total ou parcial, do imóvel a terceiros, sem o consentimento prévio e por escrito do(a) LOCADOR(A).</p>
+        <p class="clausula"><strong>CLÁUSULA QUINTA:</strong> O(A) LOCATÁRIO(A) obriga-se a conservar o imóvel no perfeito estado em que o recebeu, conforme laudo de vistoria anexo (se houver), responsabilizando-se pelos danos ou estragos que vier a causar ao imóvel ou às suas instalações, por si, seus familiares, visitantes ou prepostos.</p>
+        <p><strong>Parágrafo Único:</strong> Quaisquer benfeitorias úteis ou voluptuárias realizadas pelo(a) LOCATÁRIO(A) não gerarão direito a indenização ou retenção, incorporando-se ao imóvel, salvo se expressamente autorizado por escrito pelo(a) LOCADOR(A).</p>
+    </div>
+
+    <div class="section">
+        <h2>DA RESCISÃO</h2>
+        <p class="clausula"><strong>CLÁUSULA SEXTA:</strong> A infração de qualquer das cláusulas deste contrato ensejará a sua rescisão de pleno direito, sujeitando-se a parte infratora ao pagamento da multa contratual equivalente a {{penalty_months | default("3 (três)")}} meses de aluguel vigente à época da infração, proporcional ao tempo restante do contrato, sem prejuízo das demais penalidades e do ressarcimento por perdas e danos.</p>
+    </div>
+
+    <div class="section">
+        <h2>DA GARANTIA (Opcional)</h2>
+        <p class="clausula"><strong>CLÁUSULA SÉTIMA:</strong> Como garantia das obrigações assumidas neste contrato, o(a) LOCATÁRIO(A) apresenta a modalidade de {{guarantee_type | default("____ (Ex: Fiança, Seguro Fiança, Caução)")}}.</p>
+        <!-- Detalhar a garantia escolhida -->
+        <!-- Ex: Fiança: FIADOR(A): Nome, Nacionalidade, Estado Civil, Profissão, RG, CPF, Endereço. -->
+        <!-- Ex: Caução: Valor de R$ ____ (____), depositado em ____. -->
+    </div>
+
+    <div class="section">
+        <h2>DO FORO</h2>
+        <p class="clausula"><strong>CLÁUSULA OITAVA:</strong> Fica eleito o foro da comarca de <strong>{{property_city_name}}</strong>, Estado de {{property_city_state}}, para dirimir quaisquer dúvidas ou litígios oriundos do presente contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+    </div>
+
+    <p class="indent">E, por estarem assim justos e contratados, as partes assinam o presente instrumento em 2 (duas) vias de igual teor e forma, na presença das duas testemunhas abaixo.</p>
+
+    <p style="text-align: center; margin-top: 40px;">{{property_city_name}}, {{current_date}}.</p>
+
+    <div class="signatures">
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>{{seller_name}}</strong><br>LOCADOR(A)</p>
+            <p>CPF: {{seller_cpf}}</p>
+        </div>
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>{{buyer_name}}</strong><br>LOCATÁRIO(A)</p>
+            <p>CPF: {{buyer_cpf}}</p>
+        </div>
+    </div>
+
+    <!-- Opcional: Assinatura do Fiador -->
+    <!-- 
+    <div class="signatures">
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>Nome do Fiador</strong><br>FIADOR(A)</p>
+            <p>CPF: CPF do Fiador</p>
+        </div>
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>Nome do Cônjuge do Fiador (se casado)</strong><br>CÔNJUGE DO(A) FIADOR(A)</p>
+            <p>CPF: CPF do Cônjuge</p>
+        </div>
+    </div>
+    -->
+
+    <div class="signatures">
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>Testemunha 1</strong></p>
+            <p>Nome:</p>
+            <p>CPF:</p>
+        </div>
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>Testemunha 2</strong></p>
+            <p>Nome:</p>
+            <p>CPF:</p>
+        </div>
+    </div>
+
+</body>
+</html>

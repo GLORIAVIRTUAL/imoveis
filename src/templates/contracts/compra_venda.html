@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Compra e Venda de Imóvel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2cm;
+            line-height: 1.5;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        p {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        .section {
+            margin-top: 20px;
+        }
+        .signatures {
+            margin-top: 80px;
+            display: flex; /* Use flexbox for alignment if needed, but might not render well in all PDF generators */
+            justify-content: space-around; /* Adjust as needed */
+            text-align: center;
+        }
+        .signature-block {
+            margin-top: 40px; /* Space between signature lines */
+        }
+        .signature-line {
+            border-top: 1px solid #000;
+            width: 250px;
+            margin: 0 auto 5px auto; /* Center the line */
+        }
+        strong { font-weight: bold; }
+        .indent { text-indent: 40px; }
+        .clausula { margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>INSTRUMENTO PARTICULAR DE COMPROMISSO DE COMPRA E VENDA DE IMÓVEL</h1>
+
+    <div class="section">
+        <h2>DAS PARTES</h2>
+        <p><strong>PROMITENTE(S) VENDEDOR(ES):</strong> {{seller_name}}, nacionalidade {{seller_nationality | default("brasileiro(a)")}}, estado civil {{seller_marital_status}}, profissão {{seller_profession | default("não informado")}}, portador(a) do RG nº {{seller_rg}} expedido por {{seller_rg_issuer | default("SSP/UF")}} e inscrito(a) no CPF/MF sob o nº {{seller_cpf}}, residente e domiciliado(a) em {{seller_address}}, doravante denominado(s) simplesmente VENDEDOR(ES).</p>
+        
+        <p><strong>PROMISSÁRIO(S) COMPRADOR(ES):</strong> {{buyer_name}}, nacionalidade {{buyer_nationality | default("brasileiro(a)")}}, estado civil {{buyer_marital_status}}, profissão {{buyer_profession | default("não informado")}}, portador(a) do RG nº {{buyer_rg}} expedido por {{buyer_rg_issuer | default("SSP/UF")}} e inscrito(a) no CPF/MF sob o nº {{buyer_cpf}}, residente e domiciliado(a) em {{buyer_address}}, doravante denominado(s) simplesmente COMPRADOR(ES).</p>
+        
+        <p>As partes acima identificadas têm, entre si, justo e contratado o presente Compromisso de Compra e Venda de Imóvel, que se regerá pelas cláusulas e condições seguintes.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO OBJETO DO CONTRATO</h2>
+        <p class="clausula"><strong>CLÁUSULA PRIMEIRA:</strong> O(s) VENDEDOR(ES) é(são) legítimo(s) possuidor(es) e proprietário(s) do imóvel constituído por {{property_type_description | default("um imóvel residencial/comercial")}}, localizado em {{property_address}}, Bairro {{property_neighborhood}}, Cidade {{property_city_name}}, Estado {{property_city_state}}, CEP {{property_cep | default("não informado")}}, com área total de {{property_area}} m², registrado no Cartório de Registro de Imóveis de {{property_registry_city | default("_____")}} sob a matrícula nº {{property_registry_number | default("_____")}}, livre e desembaraçado de quaisquer ônus, dívidas, arrestos ou sequestros.</p>
+        <p><strong>Parágrafo Único:</strong> O imóvel objeto deste contrato possui as seguintes características principais: {{property_description}}.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO PREÇO E DA FORMA DE PAGAMENTO</h2>
+        <p class="clausula"><strong>CLÁUSULA SEGUNDA:</strong> O preço certo e ajustado para a venda do imóvel descrito na Cláusula Primeira é de <strong>{{property_price}}</strong> ({{property_price_written | default("valor por extenso") }}), que será pago pelo(s) COMPRADOR(ES) ao(s) VENDEDOR(ES) da seguinte forma:</p>
+        <p>{{payment_method}}</p>
+        <!-- Exemplo de detalhamento de pagamento (ajustar conforme necessário): -->
+        <!-- 
+        <p>a) Sinal e princípio de pagamento no valor de R$ ____ (____), pago neste ato através de ____ (transferência bancária, cheque, etc.).</p>
+        <p>b) O restante, no valor de R$ ____ (____), será pago em ____ (____) parcelas mensais e consecutivas de R$ ____ (____) cada, vencendo a primeira em __/__/____ e as demais nos mesmos dias dos meses subsequentes, através de ____ (boleto bancário, depósito, etc.).</p>
+        <p>c) Ou: O restante, no valor de R$ ____ (____), será pago em parcela única até o dia __/__/____, por meio de ____ (financiamento bancário, recursos próprios, etc.).</p>
+        -->
+        <p><strong>Parágrafo Primeiro:</strong> A quitação total do preço ajustado é condição essencial para a transferência definitiva da propriedade do imóvel.</p>
+        <p><strong>Parágrafo Segundo:</strong> Em caso de atraso no pagamento de qualquer das parcelas (se aplicável), incidirá multa de 2% (dois por cento) sobre o valor da parcela em atraso, acrescida de juros de mora de 1% (um por cento) ao mês e correção monetária pelo índice {{index | default("IGP-M/FGV") }}.</p>
+    </div>
+
+    <div class="section">
+        <h2>DA POSSE E DA ESCRITURA DEFINITIVA</h2>
+        <p class="clausula"><strong>CLÁUSULA TERCEIRA:</strong> O(s) COMPRADOR(ES) será(ão) imitido(s) na posse precária do imóvel na data de {{possession_date | default("__/__/____")}}, passando a responder por todos os impostos, taxas e despesas que incidam sobre o imóvel a partir desta data.</p>
+        <p class="clausula"><strong>CLÁUSULA QUARTA:</strong> A escritura definitiva de compra e venda será outorgada pelo(s) VENDEDOR(ES) ao(s) COMPRADOR(ES) ou a quem este(s) indicar(em), no prazo máximo de {{deed_deadline | default("30 (trinta)")}} dias após a comprovação da quitação integral do preço estabelecido na Cláusula Segunda, correndo todas as despesas com a referida escritura, tais como imposto de transmissão (ITBI), taxas, emolumentos cartorários e registro, por conta exclusiva do(s) COMPRADOR(ES).</p>
+    </div>
+
+    <div class="section">
+        <h2>DAS DECLARAÇÕES E OBRIGAÇÕES</h2>
+        <p class="clausula"><strong>CLÁUSULA QUINTA:</strong> O(s) VENDEDOR(ES) declara(m) que o imóvel objeto deste contrato encontra-se livre e desembaraçado de quaisquer ônus reais, fiscais, judiciais ou extrajudiciais, inexistindo ações reais ou pessoais reipersecutórias sobre o mesmo.</p>
+        <p class="clausula"><strong>CLÁUSULA SEXTA:</strong> O(s) COMPRADOR(ES) declara(m) ter vistoriado o imóvel, aceitando-o no estado em que se encontra.</p>
+        <p class="clausula"><strong>CLÁUSULA SÉTIMA:</strong> O presente contrato é celebrado em caráter irrevogável e irretratável, obrigando as partes, seus herdeiros e sucessores, exceto pelo direito de arrependimento previsto no Código Civil, caso aplicável e não renunciado.</p>
+    </div>
+
+    <div class="section">
+        <h2>DA RESCISÃO</h2>
+        <p class="clausula"><strong>CLÁUSULA OITAVA:</strong> O descumprimento de qualquer das cláusulas deste contrato por qualquer das partes implicará na rescisão de pleno direito do mesmo, sujeitando-se a parte infratora ao pagamento de multa penal correspondente a {{penalty_percentage | default("10%")}} ({{penalty_percentage_written | default("dez por cento")}}) sobre o valor total do contrato, sem prejuízo das perdas e danos apuráveis.</p>
+        <p><strong>Parágrafo Único:</strong> Em caso de rescisão por culpa do(s) COMPRADOR(ES), este(s) perderá(ão) em favor do(s) VENDEDOR(ES) o valor pago a título de sinal (se aplicável), conforme artigo 418 do Código Civil, além da multa prevista no caput desta cláusula.</p>
+    </div>
+
+    <div class="section">
+        <h2>DO FORO</h2>
+        <p class="clausula"><strong>CLÁUSULA NONA:</strong> Fica eleito o foro da comarca de <strong>{{property_city_name}}</strong>, Estado de {{property_city_state}}, para dirimir quaisquer dúvidas ou litígios oriundos do presente contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.</p>
+    </div>
+
+    <p class="indent">E, por estarem assim justos e contratados, as partes assinam o presente instrumento em 2 (duas) vias de igual teor e forma, na presença das duas testemunhas abaixo.</p>
+
+    <p style="text-align: center; margin-top: 40px;">{{property_city_name}}, {{current_date}}.</p>
+
+    <div class="signatures">
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>{{seller_name}}</strong><br>PROMITENTE VENDEDOR(A)</p>
+            <p>CPF: {{seller_cpf}}</p>
+        </div>
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>{{buyer_name}}</strong><br>PROMISSÁRIO COMPRADOR(A)</p>
+            <p>CPF: {{buyer_cpf}}</p>
+        </div>
+    </div>
+
+    <div class="signatures">
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>Testemunha 1</strong></p>
+            <p>Nome:</p>
+            <p>CPF:</p>
+        </div>
+        <div class="signature-block">
+            <div class="signature-line"></div>
+            <p><strong>Testemunha 2</strong></p>
+            <p>Nome:</p>
+            <p>CPF:</p>
+        </div>
+    </div>
+
+</body>
+</html>
+
